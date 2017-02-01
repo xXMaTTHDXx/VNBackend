@@ -1,0 +1,40 @@
+group 'io.matthd.core'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+
+    maven {
+        url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+
+    maven {
+        url 'https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver'
+    }
+
+    maven {
+        name 'SoluCorpus'
+        url 'https://nexus.solucorpus.com/repository/maven-all/'
+    }
+
+    maven {
+        url 'https://mvnrepository.com/artifact/io.reactivex/rxjava'
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'org.spigotmc:spigot-api:1.11.2-R0.1-SNAPSHOT'
+    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.4.2'
+    compile group: 'io.reactivex', name: 'rxjava', version: '1.2.5'
+
+    compile 'tech.rayline.redemptive:redemptive-core:+'
+
+}

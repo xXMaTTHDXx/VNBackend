@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vn-bungee.iml" filepath="$PROJECT_DIR$/.idea/modules/vn-bungee.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vn-bungee_main.iml" filepath="$PROJECT_DIR$/.idea/modules/vn-bungee_main.iml" group="vn-bungee" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vn-bungee_test.iml" filepath="$PROJECT_DIR$/.idea/modules/vn-bungee_test.iml" group="vn-bungee" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vn-core.iml" filepath="$PROJECT_DIR$/.idea/modules/vn-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vn-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/vn-core_main.iml" group="vn-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vn-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/vn-core_test.iml" group="vn-core" />
+    </modules>
+  </component>
+</project>
