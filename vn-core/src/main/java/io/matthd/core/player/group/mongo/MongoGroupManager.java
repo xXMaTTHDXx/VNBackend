@@ -1,5 +1,6 @@
 package io.matthd.core.player.group.mongo;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import io.matthd.core.Core;
@@ -8,6 +9,7 @@ import io.matthd.core.database.mongo.MongoDatabase;
 import io.matthd.core.player.group.GroupManager;
 import io.matthd.core.player.group.VNGroup;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,12 @@ public class MongoGroupManager implements GroupManager {
 
         MongoGroup mongoGroup = (MongoGroup) group;
 
+        DBObject find = new BasicDBObject("_id", mongoGroup.getRawName());
+
+        if (this.database.getCollection("groups").find(find) != null) {
+            return;
+        }
+
         this.database.getCollection("groups").insert(mongoGroup.getDbObject());
         BungeeUtil.sendPluginMessageToAll("updateRanks");
     }
@@ -50,7 +58,7 @@ public class MongoGroupManager implements GroupManager {
 
     @Override
     public void createGroups() {
-        createGroup(new MongoGroup("Default", "&7", "", new ArrayList<>(), new String[]{""}));
+        createGroup(new MongoGroup("Default", "&7", "", new ArrayList<>(), ""));
     }
 
     @Override
@@ -93,5 +101,10 @@ public class MongoGroupManager implements GroupManager {
             groups.add(group);
         }
         return groups;
+    }
+
+    @Override
+    public boolean hasPermission(Player player, String node) {
+        return Core.getInstance().getPlayerManager().getPlayer(player).getData().getGroup().getPermissions().hasPermission(node);
     }
 }

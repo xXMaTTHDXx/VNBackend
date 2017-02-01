@@ -1,5 +1,7 @@
 package io.matthd.core.player.group;
 
+import org.bukkit.entity.Player;
+
 import java.util.List;
 
 /**
@@ -30,4 +32,6 @@ public interface GroupManager {
 
     String serializeChildren(VNGroup group);
     List<VNGroup> deserializeChildren(String children);
+
+    boolean hasPermission(Player player, String node);
 }
