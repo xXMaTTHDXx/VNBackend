@@ -9,9 +9,6 @@ import rx.Observable;
 public interface Statistic {
 
     String getName();
+    void increment(int amount);
     Observable<Player> observe();
-    void increment(Player player);
-
-    Object getValue();
-    void setValue(Object value);
 }

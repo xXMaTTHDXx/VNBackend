@@ -6,7 +6,9 @@ import io.matthd.core.Core;
 import io.matthd.core.bungee.BungeeUtil;
 import io.matthd.core.player.group.PermissionSet;
 import io.matthd.core.player.group.VNGroup;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,7 +124,7 @@ public class MongoGroup implements VNGroup {
     public void update() {
         DBObject query = new BasicDBObject("_id", rawName);
         Core.getInstance().getMongoDatabase().getCollection("groups").update(query, this.dbObject);
-        BungeeUtil.sendPluginMessageToAll("updateRanks");
+        BungeeUtil.sendPluginMessageToAll((Player) Bukkit.getOnlinePlayers().toArray()[0], "updateRanks");
     }
 
     @Override

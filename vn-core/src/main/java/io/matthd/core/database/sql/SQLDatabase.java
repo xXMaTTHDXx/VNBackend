@@ -5,6 +5,7 @@ import io.matthd.core.database.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Created by Matt on 2017-01-29.
@@ -28,6 +29,11 @@ public class SQLDatabase implements Database {
     public void connect() {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + db, user, pass);
+            Statement statement = connection.createStatement();
+
+            statement.addBatch("CREATE TABLE IF NOT EXISTS users (Uuid VARCHAR(36) NOT NULL PRIMARY KEY, Coins INT NOT NULL, Achievements VARCHAR(128), Rank VARCHAR(16), Statistics VARCHAR(128));");
+            statement.executeBatch();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

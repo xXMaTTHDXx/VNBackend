@@ -27,6 +27,11 @@ repositories {
     maven {
         url 'https://mvnrepository.com/artifact/io.reactivex/rxjava'
     }
+
+    maven {
+        name 'vault-repo'
+        url 'http://nexus.hc.to/content/repositories/pub_releases'
+    }
 }
 
 dependencies {
@@ -36,5 +41,5 @@ dependencies {
     compile group: 'io.reactivex', name: 'rxjava', version: '1.2.5'
 
     compile 'tech.rayline.redemptive:redemptive-core:+'
-
+    provided 'net.milkbowl.vault:VaultAPI:1.6'
 }

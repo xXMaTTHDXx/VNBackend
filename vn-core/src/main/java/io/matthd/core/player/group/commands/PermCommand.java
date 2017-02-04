@@ -34,10 +34,10 @@ public class PermCommand extends RDCommand {
 
         String[] perms = args[1].split(",");
 
-        if (perms.length == 0) {
+        if (perms.length == 2) {
             //Single perm;
 
-            group.addPermission(args[0]);
+            group.addPermission(args[1]);
         }
         else {
             for (String perm : perms) {

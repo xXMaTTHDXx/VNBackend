@@ -21,7 +21,7 @@ public interface GroupManager {
     }
 
     default boolean groupExists(VNGroup group) {
-        return getGroupByName(group.getRawName()) != null;
+        return group != null && getGroupByName(group.getRawName()) != null;
     }
 
     void createGroup(VNGroup group);

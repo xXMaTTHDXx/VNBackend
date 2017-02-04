@@ -2,6 +2,8 @@ package io.matthd.core.bungee;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import io.matthd.core.Core;
+import org.bukkit.entity.Player;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -12,12 +14,11 @@ import java.io.IOException;
  */
 public class BungeeUtil {
 
-    public static void sendPluginMessageToAll(String msg) {
+    public static void sendPluginMessageToAll(Player player, String msg) {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
 
         out.writeUTF("Forward");
         out.writeUTF("ALL");
-        out.writeUTF("Core");
 
         ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();
         DataOutputStream msgout = new DataOutputStream(msgbytes);
@@ -29,5 +30,7 @@ public class BungeeUtil {
 
         out.writeShort(msgbytes.toByteArray().length);
         out.write(msgbytes.toByteArray());
+
+        player.sendPluginMessage(Core.getInstance(), "Core", out.toByteArray());
     }
 }

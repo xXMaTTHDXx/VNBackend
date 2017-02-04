@@ -1,0 +1,4 @@
+name: vn-core
+main: io.matthd.core.Core
+version: 1.0
+author: GitBash

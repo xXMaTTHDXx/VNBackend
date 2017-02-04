@@ -27,6 +27,11 @@ public class MongoGroupManager implements GroupManager {
         allGroups = new ArrayList<>();
     }
 
+    public void connect() {
+        flushAndUpdate();
+        createGroups();
+    }
+
     @Override
     public List<VNGroup> getAllGroups() {
         return allGroups;
@@ -34,7 +39,9 @@ public class MongoGroupManager implements GroupManager {
 
     @Override
     public void createGroup(VNGroup group) {
-        if (groupExists(group)) return;
+        if (groupExists(group)) {
+            return;
+        }
 
         this.allGroups.add(group);
 
@@ -42,18 +49,23 @@ public class MongoGroupManager implements GroupManager {
 
         DBObject find = new BasicDBObject("_id", mongoGroup.getRawName());
 
-        if (this.database.getCollection("groups").find(find) != null) {
+        if (this.database.getCollection("groups").find(find).one() != null) {
             return;
         }
 
         this.database.getCollection("groups").insert(mongoGroup.getDbObject());
-        BungeeUtil.sendPluginMessageToAll("updateRanks");
+        BungeeUtil.sendPluginMessageToAll((Player) Bukkit.getOnlinePlayers().toArray()[0], "updateRanks");
     }
 
     @Override
     public void deleteGroup(VNGroup group) {
         this.allGroups.remove(group);
+        MongoGroup mongoGroup = (MongoGroup) group;
 
+        DBObject find = new BasicDBObject("_id", mongoGroup.getRawName());
+
+        this.database.getCollection("groups").remove(find);
+        BungeeUtil.sendPluginMessageToAll((Player) Bukkit.getOnlinePlayers().toArray()[0], "updateRanks");
     }
 
     @Override

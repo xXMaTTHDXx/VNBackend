@@ -12,14 +12,13 @@ import tech.rayline.core.command.RDCommand;
 public class GroupCommand extends RDCommand {
 
 
-    protected GroupCommand() {
-        super("group", new PermCommand(), new SetCommand(), new CreateCommand());
+    public GroupCommand() {
+        super("group", new PermCommand(), new SetCommand(), new CreateCommand(), new GroupAddCommand());
     }
 
     @Override
     protected void handleCommand(Player player, String[] args) throws CommandException {
-
-        if (!Core.getInstance().getGroupManager().hasPermission(player, "core.groups")) {
+        if (!Core.getInstance().getGroupManager().hasPermission(player, "core.groups") && !player.isOp()) {
             player.sendMessage(ChatColor.DARK_RED + "Not enough permissions");
             return;
         }
